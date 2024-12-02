@@ -73,3 +73,4 @@ C:\Users\Flame\Desktop\moodyfullstack\moody-backend\API\obj\Debug\net8.0\refint\
 C:\Users\Flame\Desktop\moodyfullstack\moody-backend\API\obj\Debug\net8.0\API.pdb
 C:\Users\Flame\Desktop\moodyfullstack\moody-backend\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\Flame\Desktop\moodyfullstack\moody-backend\API\obj\Debug\net8.0\ref\API.dll
+C:\Users\Flame\Desktop\moodyfullstack\moody-backend\API\obj\Debug\net8.0\API.sourcelink.json

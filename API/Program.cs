@@ -8,13 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connectionString));
-builder.Services.AddCors(options => {
-options.AddPolicy("ExpensePolicy",
-builder => {builder.WithOrigins("http://localhost:5295")
-    .AllowAnyHeader()
-    .AllowAnyMethod();
-});
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Moody", policyBuilder =>
+    {
+        policyBuilder
+            .WithOrigins("http://localhost:5173") 
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); 
+    });
 });
 
 builder.Services.AddControllers();
@@ -32,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("Moody");
 
 app.UseAuthorization();
 
