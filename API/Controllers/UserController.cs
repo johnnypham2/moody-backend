@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models;
 using API.Models.DTO;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,12 @@ namespace API.Controllers
         public bool DeleteUser(int userToDelete)
         {
             return _data.DeleteUser(userToDelete);
+        }
+
+        [HttpGet("GetAllUsers")]
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _data.GetAllUsers();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,6 +26,11 @@ namespace API.Services
         public bool DoesUserExist(string username)
         {
             return _context.Users.SingleOrDefault(u => u.Username == username) != null;
+        }
+
+        //Get All Users
+        public IEnumerable<User> GetAllUsers(){
+            return _context.Users;
         }
 
         //ADDING USER LOGIC
@@ -92,11 +98,16 @@ namespace API.Services
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            Result = Ok(new  { Token = tokenString }); 
+            User userInfo = GetUserByUserName(user.UserName);
+            Result = Ok(new  { Token = tokenString, userId = userInfo.Id }); 
             }
             return Result;
         }
 
+        public User GetUserByUserName(string userName)
+        {
+            return _context.Users.SingleOrDefault(x => x.Username == userName);
+        }
         private User GetUser(int id)
         {
             return _context.Users.SingleOrDefault(user => user.Id == id);
