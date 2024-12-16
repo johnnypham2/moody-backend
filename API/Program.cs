@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("Moody", policyBuilder =>
     {
         policyBuilder
-            .WithOrigins("http://localhost:5173") 
+            .WithOrigins("http://localhost:5173", "https://moody.azurewebsites.net" ) 
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); 
